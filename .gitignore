@@ -8,3 +8,7 @@ __pycache__
 .streamlit
 
 misc
+data/.DS_Store
+**/.DS_Store
+
+
