@@ -13,3 +13,5 @@ data/.DS_Store
 
 
 .DS_Store
+
+llama2_api/.cache
