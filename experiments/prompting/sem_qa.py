@@ -70,8 +70,18 @@ query_engine = vector_index.as_query_engine(similarity_top_k=3)
 # )
 # query_engine = RetrieverQueryEngine.from_args(recursive_retriever)
 
+llm = CTransformers(
+            model="./llama2_api/.cache/huggingface/hub/models--TheBloke--Llama-2-7B-Chat-GGML/snapshots/76cd63c351ae389e1d4b91cab2cf470aab11864b/llama-2-7b-chat.ggmlv3.q2_K.bin",
+            model_type="llama"
+        )
 
-llm = OpenAI(model="gpt-3.5-turbo", api_key=OPENAI_API_KEY)
+# llm = OpenAI(model="gpt-3.5-turbo", api_key=OPENAI_API_KEY)
+
+# api_url = "http://llama2_api:80/request"
+# data = { "content": content }
+
+# response = requests.post(api_url, json=data)
+
 service_context = ServiceContext.from_defaults(llm=llm)
 
 query_engine_tool = [

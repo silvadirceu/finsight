@@ -9,6 +9,9 @@ from langchain.chat_models import ChatOpenAI
 from llama_index.schema import Document
 from llama_index.llms import OpenAI
 # from llama_index.node_parser import SimpleNodeParser
+from langchain.llms import CTransformers
+from langchain_community.llms import LlamaCpp
+from langchain_experimental.chat_models import Llama2Chat
 
 
 # from dotenv import dotenv_values
@@ -37,6 +40,22 @@ def get_model(model_name):
     OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
     if model_name == "openai":
         model = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model_name="gpt-3.5-turbo")
+
+    if model_name == "llama2":
+        # model = CTransformers(
+        #     model="./llama2_api/.cache/huggingface/hub/models--TheBloke--Llama-2-7B-Chat-GGML/snapshots/76cd63c351ae389e1d4b91cab2cf470aab11864b/llama-2-7b-chat.ggmlv3.q2_K.bin",
+        #     model_type="llama"
+        # )
+        llm = LlamaCpp(
+            model_path="./llama2_api/.cache/firefly-llama2-7b-chat.Q5_K_M.gguf",
+            temperature=0.75,
+            max_tokens=2000,
+            top_p=1,
+            streaming=False,
+            verbose=True,  # Verbose is required to pass to the callback manager
+        )
+
+        model = Llama2Chat(llm=llm)
     return model
 
 def process_pdf(pdfs):

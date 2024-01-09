@@ -54,7 +54,7 @@ def process_pdf(pdf):
 
 def get_vector_index(nodes, vector_store):
     print(nodes)
-    llm = get_model("openai")
+    llm = get_model("llama2")
     if vector_store == "faiss":
         d = 1536
         faiss_index = faiss.IndexFlatL2(d)
